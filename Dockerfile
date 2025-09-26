@@ -40,9 +40,24 @@ RUN npm install && npm run build
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Generate storage link
+RUN php artisan storage:link
+
+# Optimize Laravel
+RUN php artisan config:cache && \
+    php artisan route:cache && \
+    php artisan view:cache
 
 # Expose port 80
 EXPOSE 80
 
-# Start Apache
-CMD ["apache2-foreground"]
+# Create startup script
+RUN echo '#!/bin/bash\n\
+php artisan migrate --force\n\
+apache2-foreground' > /usr/local/bin/start-apache && \
+    chmod +x /usr/local/bin/start-apache
+
+# Start Apache with migrations
+CMD ["/usr/local/bin/start-apache"]
