@@ -39,8 +39,8 @@ class ScheduleController extends Controller
             'course_id' => ['required','exists:courses,id'],
             'professor_id' => ['nullable','exists:professors,id'],
             'room_id' => ['nullable','exists:rooms,id'],
-            'start_time' => ['required','date_format:H:i'],
-            'end_time' => ['required','date_format:H:i','after:start_time'],
+            'start_time' => ['required','regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/'],
+            'end_time' => ['required','regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/','after:start_time'],
             'day' => ['required','in:MWF,TTH,Sat'],
         ]);
 
@@ -86,8 +86,8 @@ class ScheduleController extends Controller
             'course_id' => ['required','exists:courses,id'],
             'professor_id' => ['nullable','exists:professors,id'],
             'room_id' => ['nullable','exists:rooms,id'],
-            'start_time' => ['required','date_format:H:i'],
-            'end_time' => ['required','date_format:H:i','after:start_time'],
+            'start_time' => ['required','regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/'],
+            'end_time' => ['required','regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/','after:start_time'],
             'day' => ['required','in:MWF,TTH,Sat'],
             'professor_status' => ['nullable','in:Present,Absent,On Leave,On Meeting'],
         ]);

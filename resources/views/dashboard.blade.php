@@ -416,10 +416,10 @@ function renderFormFields(type, data){
                 <div class=\"dropdown-menu w-100\" id=\"course_dropdown\" style=\"max-height: 200px; overflow-y: auto;\"></div>
             </div>
         </div>
-        <div class=\"mb-3\"><label class=\"form-label\">Professor</label><select class=\"form-select\" id=\"professor_id\"><option value=\"\"></option>${buildOptions(@json($professors),'id','name', value('professor_id'))}</select></div>
-        <div class=\"mb-3\"><label class=\"form-label\">Room</label><select class=\"form-select\" id=\"room_id\"><option value=\"\"></option>${buildOptions(@json($rooms),'id','name', value('room_id'))}</select></div>
-        <div class=\"row\"><div class=\"col\"><label class=\"form-label\">Start</label><input class=\"form-control\" id=\"start_time\" type=\"time\" value=\"${escapeHtml(value('start_time',''))}\"></div>
-        <div class=\"col\"><label class=\"form-label\">End</label><input class=\"form-control\" id=\"end_time\" type=\"time\" value=\"${escapeHtml(value('end_time',''))}\"></div></div>
+        <div class=\"mb-3\"><label class=\"form-label\">Professor</label><select class=\"form-select\" id=\"professor_id\">${buildOptions(@json($professors),'id','name', value('professor_id'))}</select></div>
+        <div class=\"mb-3\"><label class=\"form-label\">Room</label><select class=\"form-select\" id=\"room_id\">${buildOptions(@json($rooms),'id','name', value('room_id'))}</select></div>
+        <div class=\"row\"><div class=\"col\"><label class=\"form-label\">Start</label><input class=\"form-control\" id=\"start_time\" type=\"time\" value=\"${escapeHtml(value('start_time_formatted') || value('start_time',''))}\"></div>
+        <div class=\"col\"><label class=\"form-label\">End</label><input class=\"form-control\" id=\"end_time\" type=\"time\" value=\"${escapeHtml(value('end_time_formatted') || value('end_time',''))}\"></div></div>
         <div class=\"mb-3 mt-3\"><label class=\"form-label\">Day</label><select class=\"form-select\" id=\"day\">${['MWF','TTH','Sat'].map(d=>`<option ${value('day')===d?'selected':''} value=\"${d}\">${d}</option>`).join('')}</select></div>`;
         
         // Initialize course search functionality

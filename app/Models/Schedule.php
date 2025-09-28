@@ -17,6 +17,18 @@ class Schedule extends Model
         'professor_status',
     ];
 
+    protected $appends = ['start_time_formatted', 'end_time_formatted'];
+
+    public function getStartTimeFormattedAttribute()
+    {
+        return $this->start_time ? date('H:i', strtotime($this->start_time)) : '';
+    }
+
+    public function getEndTimeFormattedAttribute()
+    {
+        return $this->end_time ? date('H:i', strtotime($this->end_time)) : '';
+    }
+
     public function room(): BelongsTo
     {
         return $this->belongsTo(Room::class);
